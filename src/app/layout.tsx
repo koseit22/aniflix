@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppStoreProvider } from "@/components/app-store";
 import { AppShell } from "@/components/app-shell";
@@ -17,6 +17,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ANIFLIX | 家族の視聴プランナー",
   description: "観たいアニメを、家族それぞれのペースで楽しむための視聴プランナー。",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#211a1e",
 };
 
 export default function RootLayout({

@@ -1,65 +1,31 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const features = [
+  ["🔎", "作品をさがす", "AniList API で、観たいアニメをすぐに見つけます。"],
+  ["🕰️", "ペースを決める", "1日の視聴時間から、完走の目安を自動で計算します。"],
+  ["👨‍👩‍👧", "みんなで楽しむ", "プロフィールごとに、好きな作品と進み具合を分けて管理できます。"],
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div>
+      <section className="border-b border-white/10 bg-[radial-gradient(ellipse_at_top,_#864258_0%,_#3c2630_48%,_#211a1e_78%)]">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-10 sm:py-28">
+          <p className="mb-4 text-xs font-bold tracking-[0.24em] text-[#ff9ab0]">FAMILY WATCH PLANNER</p>
+          <h1 className="max-w-3xl text-5xl font-black leading-[1.05] tracking-tight sm:text-7xl">アニメの時間を、<br />もっと楽しい予定に。</h1>
+          <p className="mt-6 max-w-xl text-base leading-7 text-rose-100/80">ANIFLIX は、作品探しから視聴ペースの計画、進捗の記録までをひとつにした家族向けの視聴プランナーです。</p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/search" className="rounded-2xl bg-[#ff5d7e] px-6 py-3 font-bold shadow-lg shadow-rose-950/30 transition hover:bg-[#ff7793]">作品をさがす</Link>
+            <Link href="/watching" className="rounded-2xl bg-white/12 px-6 py-3 font-bold transition hover:bg-white/20">視聴中をみる</Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-10">
+        <p className="text-sm font-bold text-[#ff9ab0]">できること</p>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {features.map(([emoji, title, description]) => <article key={title} className="rounded-3xl border border-white/10 bg-[#3a2930] p-6 shadow-xl shadow-black/10"><span className="text-3xl">{emoji}</span><h2 className="mt-4 text-xl font-black">{title}</h2><p className="mt-2 text-sm leading-6 text-rose-100/70">{description}</p></article>)}
         </div>
-      </main>
+      </section>
     </div>
   );
 }

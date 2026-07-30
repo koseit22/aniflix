@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ANIFLIX
 
-## Getting Started
+家族それぞれの「観たい」と「観終わった」を、無理のない視聴ペースで管理するアニメ視聴プランナーです。
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)
+
+## 開発背景
+
+観たいアニメは増えていく一方で、「何時間あれば観終わるのか」「今から始めても続けられるのか」が分からず、作品を選ぶこと自体が負担になると感じました。
+
+そこで、作品検索・視聴進捗・1日の視聴時間から算出する完走目安を一つにまとめました。個人利用だけでなく、子どもや親も使えるよう、プロフィールごとにデータを分けて管理できる設計にしています。
+
+## 主な機能
+
+- AniList GraphQL API を使ったアニメ検索
+- 30分刻み（30分〜10時間）の視聴時間設定
+- 全話数と1話24分を基にした残り時間・完走予定の計算
+- 「−／＋」ボタンによる分かりやすい視聴進捗の記録
+- 最終話まで観終えた作品を Watchリスト（完走ライブラリ）へ自動移動
+- 家族ごとのローカルプロフィール切替・編集
+- ブラウザの Local Storage によるプロフィール別データ保存
+- 作品検索／視聴中／完走ライブラリ／プロフィールを分けたページ構成
+
+## 技術スタック
+
+- Next.js 16（App Router）
+- TypeScript
+- Tailwind CSS
+- AniList GraphQL API
+- Local Storage
+
+## AI を活用した開発について
+
+本プロジェクトでは、AI を実装支援とレビューのパートナーとして活用しました。一方で、何を作るか・どの体験を優先するか・どのように検証するかは、自分で判断しています。
+
+### AI を活用した点
+
+- 画面構成や文言のアイデア出し
+- TypeScript / Next.js の実装補助
+- API エラー時の原因切り分けと改善案の比較
+- コードレビュー、型チェック、UI 改善案の検討
+
+### 自分で設計・検証した点
+
+- **課題設定**：作品選びで必要になる「残り時間」と「完走の見通し」を中心に据える
+- **情報設計**：「作品を探す」「視聴中」「Watchリスト（完走済み）」を役割ごとに分離する
+- **ユーザー体験**：子どもや親でも扱いやすいよう、進捗入力をスライダーではなく大きな `−／＋` 操作にする
+- **データ設計**：プロフィールごとに視聴中・完走履歴・視聴時間設定を分離し、Local Storage へ永続化する
+- **API 選定**：Jikan API の 504 を実際に確認し、検索に必要な作品名・画像・話数を取得できる AniList API へ移行する
+- **検証**：ESLint、TypeScript の型チェック、Next.js の本番ビルドを通し、API 検索レスポンスも確認する
+
+AI を使って素早く試作するだけで終わらせず、ユーザー課題・データの流れ・エラー時の挙動を検討し、実際に動作を確認しながら改善しました。
+
+## ローカルでの起動
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`http://localhost:3000` を開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 今後の展望
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Supabase / Firebase を使った本物の認証とクラウド同期
+- 家族間で共有できる視聴予定
+- 好みや残り時間を基にした AI 作品提案
+- 視聴カレンダーとリマインダー
